@@ -33,7 +33,7 @@ class db
       
       try
       {
-        $this->_db = new PDO($connStr, DBUSER, DBPASS);
+        $this->_db = new PDO($connStr, $u, $p);
         $this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       }
       catch(PDOException $e)
@@ -48,14 +48,20 @@ class db
       if (!in_array($dbvendor, array('mssql', 'mysql')))
         die('wrong db vendor: ' . $dbvendor);
  
-      if (!defined('MSSSQL_HOST'))  die('Error: MSSSQL_HOST not defined');
-      if (!defined('MSSSQL_DB'))    die('Error: MSSSQL_DB not defined');
-      if (!defined('MSSQL_USER'))   die('Error: MSSQL_USER not defined');
-      if (!defined('MSSQL_PASS'))   die('Error: MSSQL_PASS not defined');
-      if (!defined('MYSSQL_HOST'))  die('Error: MYSSQL_HOST not defined');
-      if (!defined('MYSSQL_DB'))    die('Error: MYSSQL_DB not defined');
-      if (!defined('MYSQL_USER'))   die('Error: MYSQL_USER not defined');
-      if (!defined('MYSQL_PASS'))   die('Error: MYSQL_PASS not defined');
+      if ($dbvendor == 'mssql')
+      {
+        if (!defined('MSSSQL_HOST'))  die('Error: MSSSQL_HOST not defined');
+        if (!defined('MSSSQL_DB'))    die('Error: MSSSQL_DB not defined');
+        if (!defined('MSSQL_USER'))   die('Error: MSSQL_USER not defined');
+        if (!defined('MSSQL_PASS'))   die('Error: MSSQL_PASS not defined');
+      }
+      else if ($dbvendor == 'mysql')
+      {
+        if (!defined('MYSQL_HOST'))  die('Error: MYSQL_HOST not defined');
+        if (!defined('MYSQL_DB'))    die('Error: MYSQL_DB not defined');
+        if (!defined('MYSQL_USER'))   die('Error: MYSQL_USER not defined');
+        if (!defined('MYSQL_PASS'))   die('Error: MYSQL_PASS not defined');
+      }
 
       $this->_vendor = $dbvendor;
 	}
