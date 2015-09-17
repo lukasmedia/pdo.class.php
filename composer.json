@@ -1,0 +1,7 @@
+{
+    "name": "lukasmedia/pdo-class",
+    "description": "A light weight PHP PDO class for MySQL and SQL server (mssql)",
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
